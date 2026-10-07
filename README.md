@@ -30,6 +30,8 @@ Working in a command line environment is recommended for ease of use with git an
 
 # Project Breakdown
 
+https://github.com/ajo4344/Deploying-a-Scalable-ML-Pipeline-with-FastAPI
+
 # Census Income Prediction API
 
 This project trains a Random Forest model to predict whether annual
