@@ -27,3 +27,65 @@ Working in a command line environment is recommended for ease of use with git an
 *  Create a RESTful API using FastAPI this must implement:
     * GET on the root giving a welcome message.
     * POST that does model inference.
+
+# Project Breakdown
+
+# Census Income Prediction API
+
+This project trains a Random Forest model to predict whether annual
+income is <=50K or >50K and serves predictions through FastAPI.
+
+## Setup
+
+Use Python 3.10.13. Install dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pip install flake8
+```
+
+## Train the Model
+
+```bash
+python train_model.py
+```
+
+The script loads data/census.csv, cleans surrounding spaces, and
+creates an 80/20 train-test split. It saves the model and encoders
+in model/ and categorical slice metrics in slice_output.txt.
+
+Test performance is precision 0.7353, recall 0.6378, and F1 0.6831.
+See model_card.md for details and limitations.
+
+## Run Checks
+
+```bash
+python -m pytest -v
+python -m flake8 .
+```
+
+Five tests cover training, inference, metrics, saving and loading,
+unseen categories, and slice evaluation. GitHub Actions runs pytest
+and flake8 on pushes and pull requests.
+
+## Run the API
+
+```bash
+python -m uvicorn main:app --host 127.0.0.1 --port 8000
+```
+
+GET / returns a greeting. POST /data/ accepts census features and
+returns a salary prediction.
+
+Keep the server running and execute this in another terminal:
+
+```bash
+python local_api.py
+```
+
+## Screenshots
+
+The screenshots/ folder contains:
+- unit_test.png
+- local_api.png
+- continuous_integration.png
